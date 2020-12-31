@@ -28,7 +28,7 @@ this.setState({todos:todo})
         <div>
   <TodoForm inputValue={inputValue} setInputValue={this.setInputValue} todos={todos } setTodos={this.setTodos}/>
         </div>
-        <TodoList todos={todos}/>
+        <TodoList todos={todos}  setTodos={this.setTodos}/>
       </div>
     );
   }
