@@ -39,3 +39,7 @@
 .trash{
  color: aqua;
 }
+
+.completed{
+  text-decoration: line-through;
+}
