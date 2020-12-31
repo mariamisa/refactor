@@ -24,7 +24,7 @@ setTodos(todos.map((element)=>{
 
 
     return (
-        <div className="todo__div" key={todo.id} edit={!edit}>
+        <div className="todo__div" key={todo.id}>
          
            <li className={`todo-row ${todo.completed?"todo-row completed":""}`} >{text} 
            <div className='icons'>
