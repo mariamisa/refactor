@@ -7,6 +7,7 @@ export const TodoForm =({inputValue,setInputValue,todos,setTodos})=>{
         e.preventDefault();
          setTodos(todos = [...todos,{
             text:inputValue,
+            completed :false,
             id:Math.random()*1000
         }])
         console.log(todos)
