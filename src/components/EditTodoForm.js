@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const EditTodoForm =({handleSubmit,handleEdit,todo,todos,setTodos,edit,setEdit,inputValue,setInputValue,updatedValue,setUpdatedValue , todoId,setTodoId})=>{
+export const EditTodoForm =({todoText,handleSubmit,handleEdit,todo,todos,setTodos,edit,setEdit,inputValue,setInputValue,updatedValue,setUpdatedValue , todoId,setTodoId})=>{
 
     
 
@@ -10,7 +10,7 @@ export const EditTodoForm =({handleSubmit,handleEdit,todo,todos,setTodos,edit,se
             <input 
           className="todo-input"
             type='text'
-            value={updatedValue}
+            value={todoText}
             id='newInput'
             onChange={e=>setUpdatedValue(e.target.value)}
             />

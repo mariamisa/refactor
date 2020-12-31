@@ -30,7 +30,7 @@ setTodos(todos.map((element)=>{
            <div className='icons'>
             <button className="complete-icon" onClick={completeHandler}><FiCheckSquare/></button>
                 <button className="delete-icon" onClick={deleteHandler}><FaTrash className="trash"/></button>
-                <button className="edit-icon" onClick={()=>setEdit(todo.id)}><AiFillEdit/></button>
+                <button className="edit-icon" onClick={()=>setEdit(todo.id,todo.text)}><AiFillEdit/></button>
                 </div>
                 </li>
                 
