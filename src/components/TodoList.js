@@ -14,7 +14,7 @@ export const TodoList=({todos,todoStatus,setTodos,edit,setEdit,inputValue,setInp
         else if(todo.completed === false && todoStatus=== "false"){
             return todo
         }
-       
+       return "";
        
      })
      
@@ -26,7 +26,7 @@ return(
           
            
             filtered.map((todo)=>(
-                 console.log(todo),
+                
                 <Todo text={todo.text} key={todo.id} todo={todo} todos={todos}  setTodos={setTodos}
                 setEdit={setEdit}
                 inputValue={inputValue} setInputValue={setInputValue}
