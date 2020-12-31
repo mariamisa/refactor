@@ -17,9 +17,7 @@ export const TodoList=({todos,todoStatus,setTodos,edit,setEdit,inputValue,setInp
        
        
      })
-     filtered.map(fff=>console.log(fff.completed))
-    
-      console.log({todoStatus})
+     
      
 return(
     <ul>

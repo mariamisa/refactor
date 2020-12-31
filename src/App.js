@@ -12,7 +12,8 @@ state ={
   edit :false,
   todoStatus:'',
   todoFiltered :[],
-  todoId :null
+  todoId :null,
+  todoText:''
 }
 
 setTodoFiltered=(filtered)=>{
@@ -31,8 +32,8 @@ setTodos=(todo)=>{
 this.setState({todos:todo})
 }
 
-setEdit = (id)=>{
-  this.setState({edit:!this.state.edit , todoId:id})
+setEdit = (id,text)=>{
+  this.setState({edit:!this.state.edit , todoId:id,todoText:text})
 }
 
  handleSubmit=()=>{
@@ -57,29 +58,10 @@ setEdit = (id)=>{
   
 }
 
- filterHandler=()=>{
-switch(this.todoStatus){
-  case 'completed':
-    this.todos(this.todos.filter(todo=>{
-      return todo.completed === true
-    }))
-    break;
-    case 'uncompleted':
-      this.setTodoFiltered(this.todos.filter(todo=>{
-        return todo.completed === false
-      }))
-      break;
 
-      default:
-        this.setTodoFiltered(this.todos)
-        break;
-}
-}
-// addTodo=()=>{
-//   console.log({this.state.inputValue})
-// }
+
   render=()=>{
- const {inputValue,todos,edit,updatedValue,todoStatus,todoId}=this.state;
+ const {inputValue,todos,edit,updatedValue,todoStatus,todoId,todoText}=this.state;
     return (
       <div  className='todo-app'>
         <h1>to-do app</h1>
@@ -96,7 +78,9 @@ switch(this.todoStatus){
             handleEdit={this.handleEdit}
             updatedValue={updatedValue} setUpdatedValue={this.setUpdatedValue}/>  </div>)
             :
-            <EditTodoForm handleSubmit={this.handleSubmit} setUpdatedValue={this.setUpdatedValue}/>
+            <EditTodoForm handleSubmit={this.handleSubmit} setUpdatedValue={this.setUpdatedValue}
+            todoText={todoText}
+            />
             )
         }
        
