@@ -47,23 +47,25 @@ export class App extends React.Component {
   };
 
   handleAddTodo = () => {
-    this.setState({
-      todos: [
-        ...this.state.todos,
-        {
-          text: this.state.inputValue,
-          completed: false,
-          id: Math.random() * 1000,
-        },
-      ],
-      inputValue: "",
-    });
+    if (this.state.inputValue.trim()) {
+      this.setState({
+        todos: [
+          ...this.state.todos,
+          {
+            text: this.state.inputValue,
+            completed: false,
+            id: Math.random() * 1000,
+          },
+        ],
+        inputValue: "",
+      });
+    }
   };
 
   handelCompleted = (id) => {
     const newArray = this.state.todos.map((element) => {
       if (element.id === id) {
-        element.completed=!element.completed
+        element.completed = !element.completed;
         return element;
       }
       return element;
