@@ -1,26 +1,24 @@
-import React from 'react';
+import React from "react";
 
-export const EditTodoForm =({todoText,handleSubmit,handleEdit,todo,todos,setTodos,edit,setEdit,inputValue,setInputValue,updatedValue,setUpdatedValue , todoId,setTodoId})=>{
+const EditTodoForm = ({ handleEditSubmit, setUpdatedValue }) => {
+  return (
+    <div>
+      <input
+        className="todo-input"
+        type="text"
+        id="newInput"
+        onChange={(e) => setUpdatedValue(e.target.value)}
+      />
+      <button
+        className="todo-button"
+        type="submit"
+        value="  edit to-do "
+        onClick={handleEditSubmit}
+      >
+        update to-do
+      </button>
+    </div>
+  );
+};
 
-    
-
-  
-    return(
-        <form   className="todo-form">
-            <input 
-          className="todo-input"
-            type='text'
-            value={todoText}
-            id='newInput'
-            onChange={e=>setUpdatedValue(e.target.value)}
-            />
-            <button 
-            className="todo-button"
-            type='submit'
-            value='  edit to-do '
-           onClick={handleSubmit}
-            > update to-do </button>
-          
-        </form>
-    )
-}
+export default EditTodoForm;

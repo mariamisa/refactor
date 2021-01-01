@@ -1,93 +1,117 @@
-import React from 'react'
-import './App.css';
-import {TodoForm} from './components/TodoForm'
-import {TodoList} from './components/TodoList'
-import {EditTodoForm} from './components/EditTodoForm'
+import React from "react";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
+import EditTodoForm from "./components/EditTodoForm";
 
+import "./App.css";
 export class App extends React.Component {
-state ={
-  inputValue:'',
-  updatedValue:'',
-  todos :[],
-  edit :false,
-  todoStatus:'',
-  todoFiltered :[],
-  todoId :null,
-  todoText:''
-}
+  state = {
+    inputValue: "",
+    updatedValue: "",
+    todos: [],
+    edit: false,
+    todoStatus: "all",
+    todoFiltered: [],
+    todoId: null,
+    todoText: "",
+  };
 
-setTodoFiltered=(filtered)=>{
-  this.setState({todoFiltered:filtered})
-}
-setTodoStatus=(status)=>{
-this.setState({todoStatus:status})
-}
-setInputValue=(input)=>{
-  this.setState({inputValue:input})
-}
-setUpdatedValue=(input)=>{
-  this.setState({updatedValue:input})
-}
-setTodos=(todo)=>{
-this.setState({todos:todo})
-}
+  setTodoStatus = (status) => {
+    this.setState({ todoStatus: status });
+  };
+  setInputValue = (input) => {
+    this.setState({ inputValue: input });
+  };
+  setUpdatedValue = (input) => {
+    this.setState({ updatedValue: input });
+  };
 
-setEdit = (id,text)=>{
-  this.setState({edit:!this.state.edit , todoId:id,todoText:text})
-}
+  setEdit = (id, text) => {
+    this.setState({ edit: !this.state.edit, todoId: id, todoText: text });
+  };
 
- handleSubmit=()=>{
-  console.log(this.state.todoId,this.state.updatedValue)
-
-  this.setTodos(this.state.todos.map((element)=>{
-      if(element.id === this.state.todoId){
-          // console.log({updatedValue})
-          return{
-              ...element,
-              text : this.state.updatedValue
-          }
-         
+  handleEditSubmit = () => {
+    const updatedTodo = this.state.todos.map((element) => {
+      if (element.id === this.state.todoId) {
+        return {
+          ...element,
+          text: this.state.updatedValue,
+        };
       }
-     
       return element;
-  }))
-  this.setUpdatedValue('')
-  
-  this.setEdit()
- 
-  
-}
+    });
 
+    this.setState({ todos: updatedTodo, setUpdatedValue: "" });
 
+    this.setEdit(this.state.id, this.state.todoText);
+  };
 
-  render=()=>{
- const {inputValue,todos,edit,updatedValue,todoStatus,todoId,todoText}=this.state;
-    return (
-      <div  className='todo-app'>
-        <h1>to-do app</h1>
-       
+  handleAddTodo = () => {
+    this.setState({
+      todos: [
+        ...this.state.todos,
         {
-          (!edit ?
-            (
-              <div>
-              <TodoForm inputValue={inputValue} setInputValue={this.setInputValue} todos={todos }
-               setTodos={this.setTodos} todoStatus={todoStatus} setTodoStatus={this.setTodoStatus}/>
-                  
-            <TodoList  inputValue={inputValue} setInputValue={this.setInputValue} todos={todos}  setTodos={this.setTodos} edit={edit} 
-            setEdit={this.setEdit} todoStatus={todoStatus} 
-            handleEdit={this.handleEdit}
-            updatedValue={updatedValue} setUpdatedValue={this.setUpdatedValue}/>  </div>)
-            :
-            <EditTodoForm handleSubmit={this.handleSubmit} setUpdatedValue={this.setUpdatedValue}
-            todoText={todoText}
+          text: this.state.inputValue,
+          completed: false,
+          id: Math.random() * 1000,
+        },
+      ],
+      inputValue: "",
+    });
+  };
+
+  handelCompleted = (id) => {
+    const newArray = this.state.todos.map((element) => {
+      if (element.id === id) {
+        return {
+          ...element,
+          completed: !element.completed,
+        };
+      }
+      return element;
+    });
+    this.setState({ todos: newArray });
+  };
+
+  handelDeleteTodo = (id) => {
+    const filtered = this.state.todos.filter((element) => {
+      return element.id !== id;
+    });
+    this.setState({ todos: filtered });
+  };
+
+  render = () => {
+    const { inputValue, todoStatus, todos, edit } = this.state;
+    return (
+      <div className="todo-app">
+        <h1>to-do app</h1>
+
+        {!edit ? (
+          <div>
+            <TodoForm
+              inputValue={inputValue}
+              setInputValue={this.setInputValue}
+              setTodoStatus={this.setTodoStatus}
+              handleAddTodo={this.handleAddTodo}
             />
-            )
-        }
-       
+
+            <TodoList
+              todos={todos}
+              todoStatus={todoStatus}
+              setEdit={this.setEdit}
+              handelCompleted={this.handelCompleted}
+              handelDeleteTodo={this.handelDeleteTodo}
+            />
+          </div>
+        ) : (
+          <EditTodoForm
+            handleEditSubmit={this.handleEditSubmit}
+            setUpdatedValue={this.setUpdatedValue}
+          />
+        )}
       </div>
     );
-  }
-
+  };
 }
 
 export default App;
