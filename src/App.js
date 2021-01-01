@@ -63,10 +63,8 @@ export class App extends React.Component {
   handelCompleted = (id) => {
     const newArray = this.state.todos.map((element) => {
       if (element.id === id) {
-        return {
-          ...element,
-          completed: !element.completed,
-        };
+        element.completed=!element.completed
+        return element;
       }
       return element;
     });
